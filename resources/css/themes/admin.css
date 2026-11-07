@@ -1,0 +1,37 @@
+.admin-layout {
+    background: #f5f5f3;
+    color: #111;
+    color-scheme: light;
+}
+
+/* Page styles inherit this palette; fallbacks preserve the light theme. */
+html.dark .admin-layout {
+    --admin-page: #111315;
+    --admin-surface: #1d2023;
+    --admin-subtle: #24282c;
+    --admin-hover: #30363c;
+    --admin-text: #f5f5f5;
+    --admin-muted: #b8bdc3;
+    --admin-faint: #a3aab3;
+    --admin-border: #454b52;
+    --admin-focus: #b8bdc3;
+    --admin-primary: #373d43;
+    --admin-primary-hover: #454b52;
+    --admin-success-bg: #143c29;
+    --admin-success: #a7f3c4;
+    --admin-success-border: #286044;
+    --admin-danger-bg: #4a1e24;
+    --admin-danger: #fecaca;
+    --admin-danger-border: #7f3842;
+    --admin-warning-bg: #493614;
+    --admin-warning: #ffdf91;
+    --admin-chart: #d4d4d4;
+    background: var(--admin-page);
+    color: var(--admin-text);
+    color-scheme: dark;
+}
+
+html.dark .admin-layout input::placeholder,
+html.dark .admin-layout textarea::placeholder {
+    color: var(--admin-faint);
+}

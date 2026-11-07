@@ -1,0 +1,182 @@
+.admin-navigation {
+    background: #fff;
+    border-bottom: 1px solid #e8e8e8;
+}
+
+/* ================================
+   BRAND ROW
+================================= */
+
+.admin-navigation__brand-row {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 15px 24px 0;
+
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+}
+
+.admin-navigation__brand {
+    color: #111;
+    text-decoration: none;
+
+    font-size: 21px;
+    font-weight: 800;
+    letter-spacing: -0.5px;
+}
+
+.admin-navigation__store-link {
+    color: #555;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 650;
+}
+
+.admin-navigation__store-link:hover {
+    color: #111;
+}
+
+/* ================================
+   ADMIN NAVIGATION
+================================= */
+
+.admin-navigation__inner {
+    max-width: 1200px;
+    margin: 0 auto;
+
+    padding: 14px 24px;
+
+    display: flex;
+    align-items: center;
+
+    gap: 28px;
+}
+
+.admin-navigation__label {
+    color: #111;
+
+    font-size: 13px;
+    font-weight: 800;
+
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+
+    white-space: nowrap;
+}
+
+.admin-navigation__links {
+    display: flex;
+    align-items: center;
+
+    gap: 8px;
+
+    overflow-x: auto;
+}
+
+.admin-navigation__link {
+    display: inline-flex;
+
+    align-items: center;
+    justify-content: center;
+
+    padding: 8px 12px;
+
+    border-radius: 8px;
+
+    color: #666;
+    text-decoration: none;
+
+    font-size: 14px;
+    font-weight: 650;
+
+    white-space: nowrap;
+
+    transition:
+        background 0.15s ease,
+        color 0.15s ease;
+}
+
+.admin-navigation__link:hover {
+    background: #f3f3f3;
+    color: #111;
+}
+
+/* ACTIVE PAGE */
+
+.admin-navigation__link--active {
+    background: #111;
+    color: #fff;
+}
+
+.admin-navigation__link--active:hover {
+    background: #111;
+    color: #fff;
+}
+
+/* ================================
+   DARK MODE
+================================= */
+
+html.dark .admin-navigation {
+    background: #181818;
+    border-color: #2d2d2d;
+}
+
+html.dark .admin-navigation__brand {
+    color: #f5f5f5;
+}
+
+html.dark .admin-navigation__store-link {
+    color: #aaa;
+}
+
+html.dark .admin-navigation__store-link:hover {
+    color: #fff;
+}
+
+html.dark .admin-navigation__label {
+    color: #f5f5f5;
+}
+
+html.dark .admin-navigation__link {
+    color: #aaa;
+}
+
+html.dark .admin-navigation__link:hover {
+    background: #242424;
+    color: #fff;
+}
+
+html.dark .admin-navigation__link--active,
+html.dark .admin-navigation__link--active:hover {
+    background: #f5f5f5;
+    color: #111;
+}
+
+/* ================================
+   MOBILE
+================================= */
+
+@media (max-width: 700px) {
+
+    .admin-navigation__brand-row {
+        padding: 13px 16px 0;
+    }
+
+    .admin-navigation__inner {
+        padding: 12px 16px;
+        gap: 14px;
+    }
+
+    .admin-navigation__label {
+        display: none;
+    }
+
+    .admin-navigation__links {
+        width: 100%;
+    }
+}

@@ -1,0 +1,8 @@
+/* Fallback values in page rules preserve the original light palette. */
+html.dark .store-layout {
+    --store-text: #f5f5f5;
+    --store-muted: #b8bdc3;
+    --store-surface: #1d2023;
+    --store-button: #242424;
+    --store-border: #454b52;
+}
