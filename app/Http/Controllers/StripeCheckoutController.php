@@ -36,8 +36,8 @@ class StripeCheckoutController extends Controller
 
         $order = Order::where(
             'stripe_session_id',
-        $stripeSession->id
-            )->first();
+            $stripeSession->id
+        )->first();
 
         session()->forget('cart');
 
@@ -51,5 +51,5 @@ class StripeCheckoutController extends Controller
         }
 
         return redirect()->route('orders.show', $order);
-        }
+    }
 }

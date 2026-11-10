@@ -14,18 +14,18 @@ return new class extends Migration
         Schema::create('order_items', function (Blueprint $table) {
             $table->id();
             $table->foreignId('order_id')
-               ->constrained()
-               ->cascadeOnDelete();
+                ->constrained()
+                ->cascadeOnDelete();
             $table->foreignId('product_id')
-               ->nullable()
-               ->constrained()
-               ->nullOnDelete();
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
             $table->string('product_name');
             $table->decimal('price', 10, 2);
             $table->unsignedInteger('quantity');
             $table->decimal('subtotal', 10, 2);
             $table->timestamps();
-            });
+        });
     }
 
     /**

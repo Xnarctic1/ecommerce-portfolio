@@ -1,8 +1,8 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\StripeCheckoutController;
 use App\Http\Controllers\StripeWebhookController;
+use Illuminate\Support\Facades\Route;
 
 Route::redirect('/', '/products');
 

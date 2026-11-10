@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-            Schema::table('orders', function (Blueprint $table) {
+        Schema::table('orders', function (Blueprint $table) {
 
-    $table->string('customer_name')->nullable();
-    $table->string('email')->nullable();
-    $table->string('address')->nullable();
-    $table->string('city')->nullable();
-    $table->string('postal_code')->nullable();
-    $table->string('country')->nullable();
+            $table->string('customer_name')->nullable();
+            $table->string('email')->nullable();
+            $table->string('address')->nullable();
+            $table->string('city')->nullable();
+            $table->string('postal_code')->nullable();
+            $table->string('country')->nullable();
 
-});
+        });
     }
 
     /**
@@ -30,15 +30,15 @@ return new class extends Migration
     {
         Schema::table('orders', function (Blueprint $table) {
 
-    $table->dropColumn([
-        'customer_name',
-        'email',
-        'address',
-        'city',
-        'postal_code',
-        'country',
-    ]);
+            $table->dropColumn([
+                'customer_name',
+                'email',
+                'address',
+                'city',
+                'postal_code',
+                'country',
+            ]);
 
-});
+        });
     }
 };

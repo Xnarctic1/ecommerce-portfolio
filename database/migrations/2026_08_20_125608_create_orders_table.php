@@ -14,14 +14,14 @@ return new class extends Migration
         Schema::create('orders', function (Blueprint $table) {
             $table->id();
             $table->foreignId('user_id')
-               ->nullable()
-               ->constrained()
-               ->nullOnDelete();
+                ->nullable()
+                ->constrained()
+                ->nullOnDelete();
             $table->decimal('total', 10, 2);
             $table->string('status')
-            ->default('pending');
+                ->default('pending');
             $table->timestamps();
-            });
+        });
     }
 
     /**

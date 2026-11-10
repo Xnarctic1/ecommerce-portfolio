@@ -5,13 +5,14 @@ namespace App\Http\Controllers;
 use App\Services\StripeOrderService;
 use Illuminate\Http\Request;
 use Illuminate\Http\Response;
+use Stripe\Checkout\Session;
 use Stripe\Exception\SignatureVerificationException;
 use Stripe\Webhook;
 use UnexpectedValueException;
 
 class StripeWebhookController extends Controller
 {
-   public function handle(Request $request,StripeOrderService $stripeOrderService): Response
+    public function handle(Request $request, StripeOrderService $stripeOrderService): Response
     {
         $payload = $request->getContent();
         $signature = $request->header('Stripe-Signature');
@@ -33,8 +34,12 @@ class StripeWebhookController extends Controller
 
         if ($event->type === 'checkout.session.completed') {
             $session = $event->data->object;
-            $stripeOrderService->createFromCheckoutSession($session);
+            if (! $session instanceof Session) {
+                return response('Invalid checkout session.', 400);
             }
+
+            $stripeOrderService->createFromCheckoutSession($session);
+        }
 
         return response('Webhook received.', 200);
     }

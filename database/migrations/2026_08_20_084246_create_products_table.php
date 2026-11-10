@@ -20,7 +20,7 @@ return new class extends Migration
             $table->string('image')->nullable();
             $table->boolean('is_active')->default(true);
             $table->timestamps();
-            });
+        });
     }
 
     /**

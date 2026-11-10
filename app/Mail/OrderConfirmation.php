@@ -4,7 +4,6 @@ namespace App\Mail;
 
 use App\Models\Order;
 use Illuminate\Bus\Queueable;
-use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Attachment;
 use Illuminate\Mail\Mailables\Content;
@@ -20,7 +19,7 @@ class OrderConfirmation extends Mailable
      */
     public function __construct(public Order $order)
     {
-    $this->order->loadMissing('items');
+        $this->order->loadMissing('items');
     }
 
     /**

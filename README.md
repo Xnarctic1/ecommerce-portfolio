@@ -127,7 +127,7 @@ php artisan test
 npm run build
 ```
 
-Tests use an in-memory SQLite database configured in `phpunit.xml`. The two-factor authentication test is skipped while that optional feature is disabled.
+Tests use an in-memory SQLite database configured in `phpunit.xml`.
 
 `composer test` additionally runs formatting and static-analysis checks; `php artisan test` runs the test suite alone.
 
