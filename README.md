@@ -35,6 +35,7 @@ This application builds on the Laravel Livewire starter kit, which supplies the 
 - **Livewire pages** keep interactive forms and actions close to their Blade markup. Shared layouts provide storefront and admin navigation.
 - **Checkout prices come from the database**, rather than trusting the price displayed in the browser. A cart snapshot is attached to the Stripe session for order creation.
 - **The payment webhook delegates to `StripeOrderService`**, which verifies the paid amount and currency, creates order items in a transaction, and updates stock. A unique Stripe session ID protects against duplicate order records.
+- **Product availability is checked on the server:** inactive products return 404 on public detail pages and cannot be added to the cart or submitted to Stripe checkout. Saved cart items are rechecked at checkout.
 - **Authorization is checked on the server:** admin routes use middleware, and customer order pages check ownership.
 - **Styles are being organized incrementally** into theme, layout, component, and page files. See the [CSS guide](resources/css/README.md) for the current structure and migration status.
 
@@ -184,11 +185,10 @@ To run the same checks as GitHub Actions:
 composer ci:check
 ```
 
-The suite currently covers authentication, account settings, storefront access, dashboard redirects, and admin access restrictions. Static analysis covers the configured PHP source directories; it does not currently analyze the PHP embedded in Livewire Blade pages.
+The suite currently covers authentication, account settings, storefront access, dashboard redirects, admin access restrictions, and inactive-product/cart availability checks. Static analysis covers the configured PHP source directories; it does not currently analyze the PHP embedded in Livewire Blade pages.
 
 ## Known limitations and next steps
 
-- Enforce inactive-product restrictions on direct product URLs and checkout, in addition to catalogue filtering.
 - Define stock reservation or recovery for the case where stock becomes unavailable between starting checkout and completing payment.
 - Expand automated tests for carts, order ownership, payment webhooks, retries, and stock updates.
 - Improve the wishlist's mobile grid and complete a keyboard/accessibility review.

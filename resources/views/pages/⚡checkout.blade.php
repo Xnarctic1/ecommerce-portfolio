@@ -58,8 +58,16 @@ public function checkout(): void
         'country' => ['required', 'string', 'max:255'],
     ]);
 
+    $products = Product::whereIn('id', array_keys($cart))->get()->keyBy('id');
+
     foreach ($cart as $productId => $item) {
-        $product = Product::findOrFail($productId);
+        $product = $products->get($productId);
+
+        if (! $product || ! $product->is_active) {
+            $this->addError('stock', 'An item in your cart is no longer available. Remove it before checking out.');
+
+            return;
+        }
 
         if ($product->stock < $item['quantity']) {
             $this->addError(
@@ -77,7 +85,7 @@ public function checkout(): void
     $cartSnapshot = [];
 
     foreach ($cart as $productId => $item) {
-        $product = Product::findOrFail($productId);
+        $product = $products->get($productId);
 
         $lineItems[] = [
             'price_data' => [

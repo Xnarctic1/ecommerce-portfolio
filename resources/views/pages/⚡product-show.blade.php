@@ -21,6 +21,7 @@ new #[Layout('layouts.public')] #[Title('Product')] class extends Component
 
     public function mount(Product $product): void
     {
+        abort_unless($product->is_active, 404);
         $this->product = $product->load('images');
     }
 
@@ -248,6 +249,14 @@ new #[Layout('layouts.public')] #[Title('Product')] class extends Component
 
     public function addToCart(): void
     {
+        $this->product->refresh();
+
+        if (! $this->product->is_active) {
+            $this->addError('stock', 'This product is no longer available.');
+
+            return;
+        }
+
         if ($this->product->stock <= 0) {
             $this->addError('stock','This product is out of stock.');
         return;
