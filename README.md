@@ -1,8 +1,55 @@
 # STORE — Ecommerce Application
 
-A Laravel and Livewire ecommerce project with product browsing and filtering, a cart, wishlist, customer accounts, reviews, Stripe checkout, and an admin area for managing products, categories, and orders.
+[![CI checks](https://github.com/Xnarctic1/ecommerce-portfolio/actions/workflows/tests.yml/badge.svg)](https://github.com/Xnarctic1/ecommerce-portfolio/actions/workflows/tests.yml)
 
-These instructions run a downloaded copy locally. Commands should be executed inside the `ecommerce` directory containing `artisan` and `composer.json`.
+A full-stack ecommerce portfolio project built with Laravel and Livewire. Customers can discover products, save favourites, manage a cart, and pay through Stripe Checkout. Administrators manage the catalogue, stock, and orders through a separate dashboard.
+
+The project demonstrates database-backed customer and admin workflows, server-side validation, third-party payment integration, and automated quality checks. It is a learning and portfolio application with the limitations listed below, rather than a production-ready commerce platform.
+
+## Features
+
+| Customer experience | Administration |
+| --- | --- |
+| Product search, category filters, sorting, and pagination | Dashboard with sales and order information |
+| Product details and image galleries | Create and edit products and categories |
+| Shopping cart and wishlist | Manage product images, prices, stock, and visibility |
+| Registration, login, password reset, and account settings | View orders and update their status |
+| Stripe Checkout integration | Order confirmation and status-update emails |
+| Order history and purchase-based reviews | Restricted admin routes |
+
+Light and dark themes are available, with responsive styling across much of the application. Mobile layout improvements remain on the roadmap.
+
+## Technology
+
+- **Backend:** PHP, Laravel 13, Eloquent ORM, Laravel Fortify.
+- **Interactive UI:** Livewire 4, Blade, Alpine.js, Flux UI, Tailwind CSS 4, and custom CSS.
+- **Frontend tooling:** Vite and npm.
+- **Payments:** Stripe Checkout and signed webhooks.
+- **Database:** SQLite for the documented local setup; migrations define products, categories, orders, reviews, and wishlists.
+- **Quality checks:** Pest, Laravel Pint, Larastan/PHPStan, and GitHub Actions.
+
+## Implementation notes
+
+This application builds on the Laravel Livewire starter kit, which supplies the authentication foundation and tooling. The ecommerce work extends it with the catalogue, cart, wishlist, product reviews, order workflows, Stripe integration, and admin pages.
+
+- **Livewire pages** keep interactive forms and actions close to their Blade markup. Shared layouts provide storefront and admin navigation.
+- **Checkout prices come from the database**, rather than trusting the price displayed in the browser. A cart snapshot is attached to the Stripe session for order creation.
+- **The payment webhook delegates to `StripeOrderService`**, which verifies the paid amount and currency, creates order items in a transaction, and updates stock. A unique Stripe session ID protects against duplicate order records.
+- **Authorization is checked on the server:** admin routes use middleware, and customer order pages check ownership.
+- **Styles are being organized incrementally** into theme, layout, component, and page files. See the [CSS guide](resources/css/README.md) for the current structure and migration status.
+
+## Try the project locally
+
+Follow the instructions below to install the application, register an administrator, and add products. The current seeder does not provide a populated demo catalogue.
+
+Clone the repository:
+
+```sh
+git clone https://github.com/Xnarctic1/ecommerce-portfolio.git
+cd ecommerce-portfolio
+```
+
+Alternatively, download and extract the ZIP from GitHub. Run all following commands inside the extracted project directory containing `artisan` and `composer.json`; the folder name may differ depending on how you downloaded it.
 
 ## Requirements
 
@@ -16,7 +63,7 @@ SQLite is the simplest local setup. A separate MySQL/MariaDB server or Docker is
 
 ## 1. Install dependencies
 
-Extract the project ZIP, open a terminal in the project directory, and run:
+From the project directory, run:
 
 ```sh
 composer install
@@ -130,6 +177,25 @@ npm run build
 Tests use an in-memory SQLite database configured in `phpunit.xml`.
 
 `composer test` additionally runs formatting and static-analysis checks; `php artisan test` runs the test suite alone.
+
+To run the same checks as GitHub Actions:
+
+```sh
+composer ci:check
+```
+
+The suite currently covers authentication, account settings, storefront access, dashboard redirects, and admin access restrictions. Static analysis covers the configured PHP source directories; it does not currently analyze the PHP embedded in Livewire Blade pages.
+
+## Known limitations and next steps
+
+- Enforce inactive-product restrictions on direct product URLs and checkout, in addition to catalogue filtering.
+- Define stock reservation or recovery for the case where stock becomes unavailable between starting checkout and completing payment.
+- Expand automated tests for carts, order ownership, payment webhooks, retries, and stock updates.
+- Improve the wishlist's mobile grid and complete a keyboard/accessibility review.
+- Finish migrating the remaining inline styles and consolidate repeated UI patterns.
+- Add realistic demo seed data, project screenshots, and a hosted demonstration.
+
+These are planned improvements, not completed features.
 
 ## Project structure
 
